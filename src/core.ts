@@ -13,7 +13,12 @@ type PageObj = {
 
 export async function core() {
   const nextConfig = (await import(`${basePath}/next.config.js`)).default;
-  const pageExtensions: string[] = nextConfig.pageExtensions ?? [];
+  const pageExtensions: string[] = nextConfig.pageExtensions ?? [
+    "page.tsx",
+    "page.ts",
+    "page.jsx",
+    "page.js",
+  ];
 
   const files = await listFiles(path.resolve(basePath, "src", "app"));
   const pageFiles = files.filter((file) =>
