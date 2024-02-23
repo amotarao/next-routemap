@@ -1,0 +1,14 @@
+{
+  "name": "next-routemap",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "next-routemap": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amon Sawamura <amon.sawamura@gmail.com>",
+  "license": "MIT"
+}
