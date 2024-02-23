@@ -10,5 +10,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Amon Sawamura <amon.sawamura@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.20",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  }
 }
