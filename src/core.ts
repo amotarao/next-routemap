@@ -49,7 +49,8 @@ export async function core() {
           params,
           hasPageContext,
           pageContextAs:
-            "PageContext" + route.replace(/\//g, "_").replace(/[\[\]\-~]/g, ""),
+            "PageContext" +
+            route.replace(/\//g, "_").replace(/[\[\]\.\-~]/g, ""),
         };
       }),
     )
