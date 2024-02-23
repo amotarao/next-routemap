@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import { core } from "../dist/main.mjs";
+import { core } from "../dist/core.mjs";
 
 core();
