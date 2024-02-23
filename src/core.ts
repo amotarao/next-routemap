@@ -92,7 +92,7 @@ function makePath(pathname: string, pageContext?: PageContext): string {
   return path + (search ? '?' + search : '') + hash
 }
 
-export const pagesPath = {
+export const routeMap = {
   ${pageObjs
     .map((page) => {
       if (page.hasPageContext) {
