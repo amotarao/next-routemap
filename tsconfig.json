@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "declarationMap": true,
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "inlineSourceMap": false,
-    "module": "commonjs",
+    "module": "ES2022",
     "outDir": "dist",
     "strict": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "target": "es2016"
+    "target": "ES2022"
   },
   "include": ["src"]
 }
