@@ -10,6 +10,9 @@
     "dist",
     "src"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "tsup --watch && tsc --watch",
     "build": "tsup && tsc",
