@@ -36,12 +36,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Increment version
+        run: pnpm version ${{ github.event.inputs.version }}
+
       - name: Create release PR
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Create release PR"
-          title: "Release PR"
+          commit-message: "Create release"
+          title: "Release"
           body: "This is an automated release PR"
           branch: "release-${{ github.run_number }}"
           base: "main"
