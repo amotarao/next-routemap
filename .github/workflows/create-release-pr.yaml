@@ -52,7 +52,7 @@ jobs:
       - name: Checkout and Push
         run: |
           git checkout -b release-v${{ steps.extract-version.outputs.version }}
-          git push origin head
+          git push origin HEAD:release-v${{ steps.extract-version.outputs.version }}
 
       - name: Create release PR
         run: >
