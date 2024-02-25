@@ -37,10 +37,12 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Create release PR
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git checkout -b release-${{ github.run_number }}
-          npm version ${{ github.event.inputs.version }}
-          git push origin release-${{ github.run_number }}
-          gh pr create --title "Release PR" --body "This is an automated release PR" --base main --head release-${{ github.run_number }}
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Create release PR"
+          title: "Release PR"
+          body: "This is an automated release PR"
+          branch: "release-${{ github.run_number }}"
+          base: "main"
+          labels: "release"
