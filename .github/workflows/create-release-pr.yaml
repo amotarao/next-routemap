@@ -56,5 +56,4 @@ jobs:
           title: "Release v${{ steps.extract-version.outputs.version }}"
           body: "This is an automated release PR"
           branch: "release-v${{ steps.extract-version.outputs.version }}"
-          base: ${{ github.ref }}
           labels: "release"
