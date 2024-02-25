@@ -50,10 +50,12 @@ jobs:
           echo "version=$(node -p -e "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Create release PR
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Release v${{ steps.extract-version.outputs.version }}"
-          body: "This is an automated release PR"
-          branch: "release-v${{ steps.extract-version.outputs.version }}"
-          labels: "release"
+        run: |
+          gh pr create \
+          --title "Release v${{ steps.extract-version.outputs.version }}" \
+          --body "This is an automated release PR" \
+          --base ${{ github.ref }} \
+          --head "release-v${{ steps.extract-version.outputs.version }}" \
+          --label "release"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
