@@ -54,7 +54,7 @@ jobs:
           gh pr create \
           --title "Release v${{ steps.extract-version.outputs.version }}" \
           --body "This is an automated release PR" \
-          --base ${{ github.ref }} \
+          --base main \
           --head "release-v${{ steps.extract-version.outputs.version }}" \
           --label "release"
         env:
