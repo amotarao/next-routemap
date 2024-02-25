@@ -39,6 +39,11 @@ jobs:
       - name: Increment version
         run: pnpm version ${{ github.event.inputs.version }}
 
+      - name: Extract version
+        id: extract-version
+        run: |
+          echo "version=$(node -p -e "require('./package.json').version")" >> $GITHUB_OUTPUT
+
       - name: Create release PR
         uses: peter-evans/create-pull-request@v6
         with:
