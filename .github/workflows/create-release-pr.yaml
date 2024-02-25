@@ -38,9 +38,6 @@ jobs:
       - name: Enable pnpm
         run: corepack enable pnpm
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
       - name: Increment version
         run: pnpm version ${{ github.event.inputs.version }}
 
