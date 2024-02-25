@@ -1,0 +1,65 @@
+name: Create Release PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: choice
+        description: "Select the version for the release"
+        required: true
+        default: "patch"
+        options:
+          - major
+          - minor
+          - patch
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  create_release_pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Enable pnpm
+        run: corepack enable pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Increment version
+        run: pnpm version ${{ github.event.inputs.version }}
+
+      - name: Extract version
+        id: extract-version
+        run: |
+          echo "version=$(node -p -e "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Checkout and Push
+        run: |
+          git checkout -b release-v${{ steps.extract-version.outputs.version }}
+          git push origin HEAD:release-v${{ steps.extract-version.outputs.version }}
+
+      - name: Create release PR
+        run: >
+          gh pr create
+          --title "Release v${{ steps.extract-version.outputs.version }}"
+          --body "This is an automated release PR"
+          --base ${{ github.ref }}
+          --label "release"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
