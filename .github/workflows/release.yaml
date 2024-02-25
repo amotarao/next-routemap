@@ -41,5 +41,9 @@ jobs:
           git tag v${{ steps.extract-version.outputs.version }}
           git push origin --tags
 
+      - name: Set NPM token
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+
       - name: Publish package
         run: pnpm publish
