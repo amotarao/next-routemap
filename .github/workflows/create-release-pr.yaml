@@ -56,10 +56,11 @@ jobs:
         run: git log --oneline -n 10
 
       - name: Create release PR
-        run: |
-          gh pr create \
-          --title "Release v${{ steps.extract-version.outputs.version }}" \
-          --body "This is an automated release PR" \
+        run: >
+          gh pr create
+          --title "Release v${{ steps.extract-version.outputs.version }}"
+          --body "This is an automated release PR"
+          --base "main"
           --label "release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
