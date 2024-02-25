@@ -48,9 +48,8 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Create release"
-          title: "Release"
+          title: "Release v${{ steps.extract-version.outputs.version }}"
           body: "This is an automated release PR"
-          branch: "release-${{ github.run_number }}"
-          base: "main"
+          branch: "release-v${{ steps.extract-version.outputs.version }}"
+          base: ${{ github.ref }}
           labels: "release"
