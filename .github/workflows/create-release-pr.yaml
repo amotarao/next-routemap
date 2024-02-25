@@ -50,17 +50,16 @@ jobs:
           echo "version=$(node -p -e "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Checkout
-        run: git checkout -b release-v${{ steps.extract-version.outputs.version }}
-
-      - name: Log
-        run: git log --oneline -n 10
+        run: |
+          git checkout -b release-v${{ steps.extract-version.outputs.version }}
+          git push origin head
 
       - name: Create release PR
         run: >
           gh pr create
           --title "Release v${{ steps.extract-version.outputs.version }}"
           --body "This is an automated release PR"
-          --base "main"
+          --base ${{ github.ref }}
           --label "release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
