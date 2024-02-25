@@ -49,7 +49,7 @@ jobs:
         run: |
           echo "version=$(node -p -e "require('./package.json').version")" >> $GITHUB_OUTPUT
 
-      - name: Checkout
+      - name: Checkout and Push
         run: |
           git checkout -b release-v${{ steps.extract-version.outputs.version }}
           git push origin head
